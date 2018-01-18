@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-public class SuperMario extends Narrows implements ActionListener,MouseListener, KeyListener {
+public class SuperMario implements ActionListener,MouseListener, KeyListener {
     public static SuperMario superMario;
     public int xposition;
     public Render render;
@@ -18,7 +18,7 @@ public class SuperMario extends Narrows implements ActionListener,MouseListener,
     public  int dx;
     public Rectangle Mario,Scene;
     public  int ticks, yMotion,score;
-    public boolean gameOver , started, nextround ;
+    public boolean gameOver , started, nextround,delete ;
     public BufferedImage image;
     public BufferedImage image2;
     public BufferedImage image3;
@@ -44,6 +44,7 @@ public class SuperMario extends Narrows implements ActionListener,MouseListener,
         up = true;
         down = false;
         jump = false;
+        delete = false;
         jframe.add(render);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setSize(Window_WIDTH, Window_HEIGHT);
@@ -54,14 +55,13 @@ public class SuperMario extends Narrows implements ActionListener,MouseListener,
         jframe.setResizable(false);
         jframe.setContentPane(render);
         jframe.setVisible(true);
-        addNarrows(true);
-        addNarrows(true);
-        addNarrows(true);
+
 
         jframe.setFocusable(true);
         jframe.requestFocusInWindow();
         jframe.addKeyListener(this);
-        //narrow.addNarrows(true);
+
+        narrow.addNarrows(true);
         level = 1;
         timer.start();
 
@@ -107,7 +107,7 @@ public class SuperMario extends Narrows implements ActionListener,MouseListener,
             g.setColor(Color.red);
             g.fillRect(Mario.x,Mario.y,Mario.width,Mario.height);
 
-        paintNarrows(g);
+       narrow.paintNarrows(g);
 
         g.setColor(Color.white);
         g.setFont(new Font("Arial",3,20));
@@ -167,49 +167,60 @@ public class SuperMario extends Narrows implements ActionListener,MouseListener,
         up = true;
         System.out.println("3");
         jump = true;
+      //  delete = true;
     }
     public void MarioFalling()
     {
         up =  true;
         down = true;
         yMotion = 0;
-        yMotion =speed;
         jump = false;
+        yMotion =speed;
         System.out.println("2");
-    }
-    public void MoveMario()
-    {
-        for (Rectangle column : narrows) {
 
-            if(Mario.y  < column.y && Mario.x >= column.x-5 && Mario.x <= column.x+40 && !jump)
-            {
-                Mario.y = column.y-20;
+    }
+    public void MoveMario() {
+        for (Rectangle column : narrow.narrows) {
+
+            if (Mario.y < column.y && Mario.x >= column.x - 5 && Mario.x <= column.x + 40 && !jump) {
+                Mario.y = column.y - 20;
                 yMotion = speed;
                 yMotion = 0;
-                up =  true;
+                up = true;
                 down = true;
                 System.out.println("1");
                 jump = true;
 
-            }
-            else if(Mario.y <= column.y &&(Mario.x < column.x+5 || Mario.x > column.x + 40) && jump)
+            } else if (Mario.y <= column.y && (Mario.x < column.x + 5 || Mario.x > column.x + 40) && jump)
             {
                 MarioFalling();
             }
-            else if(Mario.y <= column.y+30 && Mario.x > column.x && Mario.x < column.x+40 && !jump)
-            {
+            else if (Mario.y <= column.y + 30 && Mario.x > column.x && Mario.x < column.x + 40 && !jump) {
                 yMotion = 0;
                 yMotion = speed;
                 down = true;
                 up = true;
                 System.out.println("3");
                 jump = true;
-                //if(Mario.x<=column.x+20) narrows.remove(0);
+                delete = true;
+                System.out.println(narrow.narrows.size());
+
                 //narrows.clear();
             }
+            // delete = false;
+           /* if(Mario.x<=column.x+20 )
+            {
+
+                delete = true;
+            }*/
         }
-        Mario.y += yMotion;
+            if (delete == true) {
+                narrow.narrows.remove(0);
+                delete = false;
+            }
+            Mario.y += yMotion;
     }
+
     public void Limitations()
     {
         if ( Mario.y > Window_HEIGHT -140 )
@@ -217,7 +228,7 @@ public class SuperMario extends Narrows implements ActionListener,MouseListener,
             Mario.y = Window_HEIGHT -140;
             yMotion = 0;
         }
-        if(Mario.x >=WIDTH) render.repaint();
+       // if(Mario.x >=800) render.repaint();
         if(Mario.x < 0) Mario.x = 0;
         if(Mario.y <= 150)
         {
@@ -268,10 +279,10 @@ public class SuperMario extends Narrows implements ActionListener,MouseListener,
             if(gameOver)
             {
                 Mario = new Rectangle(Window_WIDTH/3, Window_HEIGHT /3,20,20);
-                narrows.clear();
+                narrow.narrows.clear();
                 yMotion = 0;
                 score = 0;
-                addNarrows(true);
+                narrow.addNarrows(true);
                 gameOver = false;
             }
 
