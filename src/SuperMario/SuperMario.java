@@ -26,13 +26,16 @@ public class SuperMario implements ActionListener,MouseListener, KeyListener {
 
     public int  level;
     public Narrows narrow;
-    public enum state
+    public enum State
     {
-        UP,
-        DOWN
+        JUMP,
+        DELETE,
+        GAMEOVER,
+        STARTED
     }
     public SuperMario()
     {
+        State state;
         JFrame jframe =new JFrame();
         Timer timer = new Timer(20,this);
         render = new Render();
@@ -40,6 +43,7 @@ public class SuperMario implements ActionListener,MouseListener, KeyListener {
         xposition = -1;
         narrow = new Narrows();
        // Scene = new Rectangle(0 ,0,Window_WIDTH,Window_HEIGHT);
+       // Mario mario = new Mario(100,360,20,20);
         Mario = new Rectangle(Window_WIDTH/2-300, Window_HEIGHT,20,20);
         up = true;
         down = false;
@@ -94,15 +98,15 @@ public class SuperMario implements ActionListener,MouseListener, KeyListener {
 
           this.deplacementScene();
             g.setColor(Color.BLUE);
-            g.fillRect(xScene1,0,800,500);
-             g.fillRect(xScene2,0,800,500);
+            g.fillRect(0,0,800,500);
+             g.fillRect(0,0,800,500);
 
             g.setColor(Color.orange);
-            g.fillRect(this.xScene1, 500 -120,800,120);
-            g.fillRect(this.xScene2, 500 -120,800,120);
+            g.fillRect(0, 500 -120,800,120);
+           // g.fillRect(this.xScene2, 500 -120,800,120);
 
             g.setColor(Color.green);
-            g.fillRect(this.xScene1, 500 -120,800,20);
+            g.fillRect(0, 500 -120,800,20);
             //g.fillRect(this.xScene2, 500 -120,800,20);
             g.setColor(Color.red);
             g.fillRect(Mario.x,Mario.y,Mario.width,Mario.height);
@@ -179,40 +183,43 @@ public class SuperMario implements ActionListener,MouseListener, KeyListener {
         System.out.println("2");
 
     }
+    public void JumpingOnBlock()
+    {
+
+        yMotion = speed;
+        yMotion = 0;
+        up = true;
+        down = true;
+        System.out.println("1");
+        jump = true;
+    }
+    public void HittingLowerEdge()
+    {
+        yMotion = 0;
+        yMotion = speed;
+        down = true;
+        up = true;
+        System.out.println("3");
+        jump = true;
+        delete = true;
+    }
     public void MoveMario() {
         for (Rectangle column : narrow.narrows) {
 
             if (Mario.y < column.y && Mario.x >= column.x - 5 && Mario.x <= column.x + 40 && !jump) {
                 Mario.y = column.y - 20;
-                yMotion = speed;
-                yMotion = 0;
-                up = true;
-                down = true;
-                System.out.println("1");
-                jump = true;
+                JumpingOnBlock();
 
             } else if (Mario.y <= column.y && (Mario.x < column.x + 5 || Mario.x > column.x + 40) && jump)
             {
                 MarioFalling();
             }
             else if (Mario.y <= column.y + 30 && Mario.x > column.x && Mario.x < column.x + 40 && !jump) {
-                yMotion = 0;
-                yMotion = speed;
-                down = true;
-                up = true;
-                System.out.println("3");
-                jump = true;
-                delete = true;
+                HittingLowerEdge();
                 System.out.println(narrow.narrows.size());
 
-                //narrows.clear();
             }
-            // delete = false;
-           /* if(Mario.x<=column.x+20 )
-            {
 
-                delete = true;
-            }*/
         }
             if (delete == true) {
                 narrow.narrows.remove(0);
@@ -228,7 +235,7 @@ public class SuperMario implements ActionListener,MouseListener, KeyListener {
             Mario.y = Window_HEIGHT -140;
             yMotion = 0;
         }
-       // if(Mario.x >=800) render.repaint();
+        if(Mario.x > 773) Mario.x =773;
         if(Mario.x < 0) Mario.x = 0;
         if(Mario.y <= 150)
         {
