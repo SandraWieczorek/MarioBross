@@ -208,7 +208,6 @@ public class SuperMario extends Narrows implements ActionListener,MouseListener,
                 //narrows.clear();
             }
         }
-
         Mario.y += yMotion;
     }
     public void Limitations()
