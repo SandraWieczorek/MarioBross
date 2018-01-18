@@ -179,8 +179,6 @@ public class SuperMario extends Narrows implements ActionListener,MouseListener,
     }
     public void MoveMario()
     {
-
-
         for (Rectangle column : narrows) {
 
             if(Mario.y  < column.y && Mario.x >= column.x-5 && Mario.x <= column.x+40 && !jump)
@@ -206,7 +204,7 @@ public class SuperMario extends Narrows implements ActionListener,MouseListener,
                 up = true;
                 System.out.println("3");
                 jump = true;
-               // if(Mario.x<=column.x+20) narrows.remove(0);
+                //if(Mario.x<=column.x+20) narrows.remove(0);
                 //narrows.clear();
             }
         }
