@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d5cc5506-e155-449c-89ae-77cd1a6549d7" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/SuperMarioBross/SuperMario/Render.class" afterPath="$PROJECT_DIR$/out/production/SuperMarioBross/SuperMario/Render.class" />
-      <change beforePath="$PROJECT_DIR$/src/SuperMario/Mario.java" afterPath="$PROJECT_DIR$/src/SuperMario/Mario.java" />
+      <change beforePath="$PROJECT_DIR$/out/production/SuperMarioBross/SuperMario/Mario.class" afterPath="$PROJECT_DIR$/out/production/SuperMarioBross/SuperMario/Mario.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/SuperMarioBross/SuperMario/SuperMario$state.class" afterPath="$PROJECT_DIR$/out/production/SuperMarioBross/SuperMario/SuperMario$state.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/SuperMarioBross/SuperMario/SuperMario.class" afterPath="" />
       <change beforePath="$PROJECT_DIR$/src/SuperMario/Render.java" afterPath="$PROJECT_DIR$/src/SuperMario/Render.java" />
       <change beforePath="$PROJECT_DIR$/src/SuperMario/SuperMario.java" afterPath="$PROJECT_DIR$/src/SuperMario/SuperMario.java" />
     </list>
@@ -22,8 +23,8 @@
       <file leaf-file-name="Render.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SuperMario/Render.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="13" column="20" lean-forward="false" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+            <state relative-caret-position="221">
+              <caret line="14" column="2" lean-forward="false" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -106,9 +107,12 @@
       <file leaf-file-name="SuperMario.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SuperMario/SuperMario.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="237" column="38" lean-forward="false" selection-start-line="237" selection-start-column="38" selection-end-line="237" selection-end-column="38" />
-              <folding />
+            <state relative-caret-position="266">
+              <caret line="245" column="59" lean-forward="false" selection-start-line="245" selection-start-column="59" selection-end-line="245" selection-end-column="59" />
+              <folding>
+                <element signature="e#2589#2590#0" expanded="true" />
+                <element signature="e#2634#2635#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -389,7 +393,14 @@
       <option name="project" value="LOCAL" />
       <updated>1516294619426</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="//">
+      <created>1516298358550</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1516298358550</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -554,17 +565,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SuperMario/Render.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="13" column="20" lean-forward="false" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+        <state relative-caret-position="221">
+          <caret line="14" column="2" lean-forward="false" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SuperMario/SuperMario.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="237" column="38" lean-forward="false" selection-start-line="237" selection-start-column="38" selection-end-line="237" selection-end-column="38" />
-          <folding />
+        <state relative-caret-position="266">
+          <caret line="245" column="59" lean-forward="false" selection-start-line="245" selection-start-column="59" selection-end-line="245" selection-end-column="59" />
+          <folding>
+            <element signature="e#2589#2590#0" expanded="true" />
+            <element signature="e#2634#2635#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
