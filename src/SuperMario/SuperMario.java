@@ -134,11 +134,7 @@ public class SuperMario extends Narrows implements ActionListener,MouseListener,
     {
         if(!gameOver)
         {
-           // Mario.x -= 2*speed;
-            xposition = -1;
-            xScene1 = -50;
-            xScene2 = 750;
-
+           Mario.x -= 2*speed;
         }
     }
     public void GoRight()
@@ -146,11 +142,7 @@ public class SuperMario extends Narrows implements ActionListener,MouseListener,
         if(!gameOver)
         {
            //if(xposition == -1)
-           //{
-               xposition =1;
-               xScene1 = -50;
-               xScene2 = 750;
-           //}
+          Mario.x +=2*speed;
 
         }
     }
