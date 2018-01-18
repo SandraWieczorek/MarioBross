@@ -6,7 +6,8 @@ import java.awt.event.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-public class SuperMario implements ActionListener,MouseListener, KeyListener {
+public class
+SuperMario implements ActionListener,MouseListener, KeyListener {
     public static SuperMario superMario;
     public int xposition;
     public Render render;
@@ -23,6 +24,8 @@ public class SuperMario implements ActionListener,MouseListener, KeyListener {
     public BufferedImage image2;
     public BufferedImage image3;
     public boolean up,down,jump;
+
+    private Animation play;
 
     public int  level;
     public Narrows narrow;
@@ -42,6 +45,9 @@ public class SuperMario implements ActionListener,MouseListener, KeyListener {
         dx=1;
         xposition = -1;
         narrow = new Narrows();
+
+        play = new Animation();
+
        // Scene = new Rectangle(0 ,0,Window_WIDTH,Window_HEIGHT);
        // Mario mario = new Mario(100,360,20,20);
         Mario = new Rectangle(Window_WIDTH/2-300, Window_HEIGHT,20,20);
@@ -216,8 +222,8 @@ public class SuperMario implements ActionListener,MouseListener, KeyListener {
             }
             else if (Mario.y <= column.y + 30 && Mario.x > column.x && Mario.x < column.x + 40 && !jump) {
                 HittingLowerEdge();
+                play.wallDestroyAnimation();
                 System.out.println(narrow.narrows.size());
-
             }
 
         }
@@ -268,14 +274,17 @@ public class SuperMario implements ActionListener,MouseListener, KeyListener {
         if(e.getKeyCode() == KeyEvent.VK_UP)
         {
             GoUp();
+            play.marioJumpAnimation();
         }
         if(e.getKeyCode() == KeyEvent.VK_RIGHT)
         {
             GoRight();
+            play.marioGoRightAnimation();
         }
         if(e.getKeyCode() == KeyEvent.VK_LEFT)
         {
             GoLeft();
+            play.marioGoLeftAnimation();
         }
         if(e.getKeyCode() == KeyEvent.VK_ENTER)
         {
