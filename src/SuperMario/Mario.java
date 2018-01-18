@@ -1,19 +1,10 @@
 package SuperMario;
 
-public class Mario extends SuperMario implements Runnable
+public class Mario extends Characters
 {
 
-    @Override
-    public void run() {
-        while(true){
-        render.repaint();
-            try
-            {
-                Thread.sleep(3);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    public Mario(int x, int y, int width, int height) {
+        super(x, y, width, height);
 
-            }
-        }
     }
 }
