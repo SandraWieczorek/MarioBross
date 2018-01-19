@@ -18,7 +18,8 @@ public class SuperMario implements ActionListener,MouseListener, KeyListener {
     public Rectangle Mario;
     public  int ticks, yMotion,score;
     public boolean gameOver , started, nextround,delete ;
-    public boolean up,down,jump;
+
+    public boolean up,down,jump,anotherjump;
 
     private final int GRASS_HEIGHT = 20;
 
@@ -42,6 +43,7 @@ public class SuperMario implements ActionListener,MouseListener, KeyListener {
         Timer timer = new Timer(20,this);
         render = new Render();
         dx=1;
+        anotherjump = false;
         xposition = -1;
         narrow = new Narrows();
 
@@ -185,6 +187,7 @@ public class SuperMario implements ActionListener,MouseListener, KeyListener {
         yMotion = 0;
         jump = false;
         yMotion =speed;
+        anotherjump =false;
         System.out.println("2");
 
     }
@@ -197,6 +200,7 @@ public class SuperMario implements ActionListener,MouseListener, KeyListener {
         down = true;
         System.out.println("1");
         jump = true;
+        anotherjump=true;
     }
     public void HittingLowerEdge()
     {
@@ -211,15 +215,16 @@ public class SuperMario implements ActionListener,MouseListener, KeyListener {
     public void MoveMario() {
         for (Rectangle column : narrow.narrows) {
 
-            if (Mario.y < column.y && Mario.x >= column.x - 5 && Mario.x <= column.x + 40 && !jump) {
+            if (Mario.y < column.y && Mario.x > column.x-20 && Mario.x < column.x + 40 && !jump) {
                 Mario.y = column.y - 20;
                 JumpingOnBlock();
 
-            } else if (Mario.y <= column.y && (Mario.x < column.x + 5 || Mario.x > column.x + 40) && jump)
+            }
+            if ( (Mario.x < column.x  || Mario.x > column.x + 60) && jump)
             {
                 MarioFalling();
             }
-            else if (Mario.y <= column.y + 30 && Mario.x > column.x && Mario.x < column.x + 40 && !jump) {
+            else if (Mario.y <= column.y + 30 && Mario.x > column.x && Mario.x < column.x  && !jump) {
                 HittingLowerEdge();
                 play.wallDestroyAnimation();
                 System.out.println(narrow.narrows.size());
@@ -235,11 +240,21 @@ public class SuperMario implements ActionListener,MouseListener, KeyListener {
 
     public void Limitations()
     {
-        if ( Mario.y > WINDOW_HEIGHT -140 )
+
+        if ( Mario.y > WINDOW_HEIGHT -140 && anotherjump == false)
         {
             Mario.y = WINDOW_HEIGHT -140;
             yMotion = 0;
         }
+        if ( Mario.y > WINDOW_HEIGHT -140 && anotherjump == true)
+        {
+            yMotion = speed;
+
+           if( Mario.y == WINDOW_HEIGHT -260)  yMotion = 0;
+           // yMotion = 0;
+        }
+
+
         if(Mario.x > 773) Mario.x =773;
         if(Mario.x < 0) Mario.x = 0;
         if(Mario.y <= 150)
