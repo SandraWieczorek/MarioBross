@@ -4,27 +4,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 
-public class
-SuperMario implements ActionListener,MouseListener, KeyListener {
+public class SuperMario implements ActionListener,MouseListener, KeyListener {
     public static SuperMario superMario;
     public int xposition;
     public Render render;
-    public final int Window_WIDTH = 800;
-    public final int Window_HEIGHT = 500;
+    public final int WINDOW_WIDTH = 800;
+    public final int WINDOW_HEIGHT = 500;
     public final int speed = 5;
     public int xScene1 = -50;
     public int xScene2 = 750;
     public  int dx;
-    public Rectangle Mario,Scene;
+    public Rectangle Mario;
     public  int ticks, yMotion,score;
     public boolean gameOver , started, nextround,delete ;
-    public BufferedImage image;
-    public BufferedImage image2;
-    public BufferedImage image3;
     public boolean up,down,jump;
 
+    private final int GRASS_HEIGHT = 20;
+
+    private final int MARIO_WIDTH = 30;
+    private final int MARIO_HEIGHT = 40;
     private Animation play;
 
     public int  level;
@@ -48,16 +47,14 @@ SuperMario implements ActionListener,MouseListener, KeyListener {
 
         play = new Animation();
 
-       // Scene = new Rectangle(0 ,0,Window_WIDTH,Window_HEIGHT);
-       // Mario mario = new Mario(100,360,20,20);
-        Mario = new Rectangle(Window_WIDTH/2-300, Window_HEIGHT,20,20);
+        Mario = new Rectangle(WINDOW_WIDTH/2-300, WINDOW_HEIGHT, 0,0);
         up = true;
         down = false;
         jump = false;
         delete = false;
         jframe.add(render);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jframe.setSize(Window_WIDTH, Window_HEIGHT);
+        jframe.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
         jframe.setTitle("Super Mario Bross");
         jframe.setLocationRelativeTo(null);
@@ -104,18 +101,17 @@ SuperMario implements ActionListener,MouseListener, KeyListener {
 
           this.deplacementScene();
             g.setColor(Color.BLUE);
-            g.fillRect(0,0,800,500);
-             g.fillRect(0,0,800,500);
+            g.fillRect(0,0,WINDOW_WIDTH,WINDOW_HEIGHT);
 
             g.setColor(Color.orange);
-            g.fillRect(0, 500 -120,800,120);
+            g.fillRect(0, 500 -120,WINDOW_WIDTH,WINDOW_HEIGHT);
            // g.fillRect(this.xScene2, 500 -120,800,120);
 
             g.setColor(Color.green);
-            g.fillRect(0, 500 -120,800,20);
+            g.fillRect(0, 500 -120,800,GRASS_HEIGHT);
             //g.fillRect(this.xScene2, 500 -120,800,20);
-            g.setColor(Color.red);
-            g.fillRect(Mario.x,Mario.y,Mario.width,Mario.height);
+//            g.setColor(Color.red);
+//            g.fillRect(Mario.x,Mario.y,Mario.width,Mario.height);
 
        narrow.paintNarrows(g);
 
@@ -123,21 +119,24 @@ SuperMario implements ActionListener,MouseListener, KeyListener {
         g.setFont(new Font("Arial",3,20));
         if(!started)
         {
-            g.drawString("Play",100, Window_HEIGHT /2 -100);
+            g.drawString("Play",100, WINDOW_HEIGHT /2 -100);
         }
         if(gameOver && score!=5)
         {
-            g.drawString("Game Over!",100, Window_HEIGHT /2 - 50);
+            g.drawString("Game Over!",100, WINDOW_HEIGHT /2 - 50);
         }
         if(!gameOver && started)
         {
             g.drawString(String.valueOf("Level"),0,50);
-            g.drawString(String.valueOf(level),Window_WIDTH/4-25,50);
+            g.drawString(String.valueOf(level),WINDOW_WIDTH/4-25,50);
             g.drawString(String.valueOf("Speed"),0,130);
-            g.drawString(String.valueOf(speed),Window_WIDTH/4-25,130);
+            g.drawString(String.valueOf(speed),WINDOW_WIDTH/4-25,130);
             g.drawString(String.valueOf("Score"),0,90);
-            g.drawString(String.valueOf(score),Window_WIDTH/4-25,90);
+            g.drawString(String.valueOf(score),WINDOW_WIDTH/4-25,90);
         }
+
+        g.drawImage(render.img, Mario.x, Mario.y - GRASS_HEIGHT, MARIO_WIDTH, MARIO_HEIGHT,null);
+
     }
 
     public void GoLeft()
@@ -236,9 +235,9 @@ SuperMario implements ActionListener,MouseListener, KeyListener {
 
     public void Limitations()
     {
-        if ( Mario.y > Window_HEIGHT -140 )
+        if ( Mario.y > WINDOW_HEIGHT -140 )
         {
-            Mario.y = Window_HEIGHT -140;
+            Mario.y = WINDOW_HEIGHT -140;
             yMotion = 0;
         }
         if(Mario.x > 773) Mario.x =773;
@@ -294,7 +293,7 @@ SuperMario implements ActionListener,MouseListener, KeyListener {
             }
             if(gameOver)
             {
-                Mario = new Rectangle(Window_WIDTH/3, Window_HEIGHT /3,20,20);
+                Mario = new Rectangle(WINDOW_WIDTH/3, WINDOW_HEIGHT /3,20,20);
                 narrow.narrows.clear();
                 yMotion = 0;
                 score = 0;

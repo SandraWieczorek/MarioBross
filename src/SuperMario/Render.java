@@ -1,7 +1,10 @@
 package SuperMario;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Render extends JPanel {
 
@@ -9,6 +12,16 @@ public class Render extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         SuperMario.superMario.repaint(g);
+    }
+
+    public BufferedImage img;
+
+    public Render() {
+        try {
+            img = ImageIO.read(getClass().getResource("/SuperMario/Images/Mario.png"));
+        } catch (IOException ex) {}
+
+
     }
 }
 //na enumach boolean
